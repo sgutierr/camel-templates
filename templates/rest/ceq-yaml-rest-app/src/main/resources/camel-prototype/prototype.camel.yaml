@@ -1,0 +1,30 @@
+- route:
+    id: getStart
+    from:
+      uri: direct:getStart
+      id: from-886d
+      steps:
+        - setBody:
+            id: setBody-6f22
+            expression:
+              simple:
+                expression: '"Hello Camel"'
+                id: simple-ba29
+        - to:
+            uri: log:loginfo
+            id: to-f78c
+- restConfiguration:
+    scheme: http
+    host: 0.0.0.0
+    port: '8084'
+    component: netty-http
+- rest:
+    id: rest-7a78
+    get:
+      - id: get-af87
+        param:
+          - {}
+        consumes: application/json
+        to: direct:getStart
+        path: /users
+        produces: application/json
